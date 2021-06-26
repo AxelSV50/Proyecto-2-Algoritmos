@@ -5,9 +5,9 @@
  */
 package util;
 
+import domain.bst.BST;
 import domain.list.CircularDoublyLinkedList;
 
-import domain.list.DoublyLinkedList;
 import domain.list.SinglyLinkedList;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -19,18 +19,14 @@ import java.util.Date;
  */
 public class Utility {
 
-    private static DoublyLinkedList careersList;
+    private static BST bstProduct;
     private static SinglyLinkedList studentsList;
     private static CircularDoublyLinkedList coursesList;
     private static CircularDoublyLinkedList enrollmentList;
     private static CircularDoublyLinkedList deEnrollmentList;
     private static SinglyLinkedList timeTableList;
 
-    //Tiene las carreras agregadas
-//    public static DoublyLinkedList getCareersList() {
-//        careersList = data.FileManagementCareers.getCareers();
-//        return careersList;
-//    }
+   
 //
 //    //Tiene los estudiantes agregados
 //    public static SinglyLinkedList getStudentsList() {

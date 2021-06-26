@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="749.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.menu.MenuFXMLController">
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: WHITE;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="img9" fitHeight="106.0" fitWidth="107.0" layoutX="322.0" layoutY="334.0" onMouseClicked="#managemenPlaces" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/lugares.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <Circle fx:id="circle4" fill="#340049" layoutX="177.0" layoutY="386.0" onMouseClicked="#managementSearch" radius="53.0" stroke="TRANSPARENT" strokeType="INSIDE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Circle>
+            <Pane layoutX="-2.0" prefHeight="40.0" prefWidth="755.0" style="-fx-background-color: #340049;">
+               <children>
+                  <Button fx:id="btnExit" layoutX="141.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnExit" style="-fx-background-color: Transparent;" text="Salir" textFill="WHITE">
+                     <font>
+                        <Font name="Yu Gothic Bold" size="12.0" />
+                     </font>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </Button>
+                  <Button fx:id="btnLogout" layoutX="30.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnLogout" style="-fx-background-color: Transparent;" text="Cerrar sesión" textFill="WHITE">
+                     <font>
+                        <Font name="Yu Gothic Bold" size="12.0" />
+                     </font>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </Button>
+               </children>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Pane>
+            <Circle fx:id="circle2" fill="#340049" layoutX="372.0" layoutY="188.0" onMouseClicked="#managementRestSuper" radius="53.0" stroke="TRANSPARENT" strokeType="INSIDE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Circle>
+            <Circle fx:id="circle3" accessibleRole="BUTTON" fill="#340049" layoutX="567.0" layoutY="188.0" onMouseClicked="#managementProducts" radius="53.0" stroke="TRANSPARENT" strokeType="INSIDE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Circle>
+            <Circle fx:id="circle1" fill="#340049" layoutX="177.0" layoutY="188.0" onMouseClicked="#managementFood" radius="53.0" stroke="TRANSPARENT" strokeType="INSIDE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Circle>
+            <Text fill="#340049" layoutX="342.0" layoutY="467.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lugares">
+               <font>
+                  <Font name="Candara Light" size="20.0" />
+               </font>
+               <effect>
+                  <Bloom />
+               </effect>
+            </Text>
+            <ImageView fx:id="img10" fitHeight="106.0" fitWidth="107.0" layoutX="514.0" layoutY="333.0" onMouseClicked="#managementReports" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/document.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <Text fill="#340049" layoutX="534.0" layoutY="467.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reportes">
+               <font>
+                  <Font name="Candara Light" size="20.0" />
+               </font>
+               <effect>
+                  <Bloom />
+               </effect>
+            </Text>
+            <ImageView fx:id="img8" fitHeight="55.0" fitWidth="51.0" layoutX="152.0" layoutY="361.0" onMouseClicked="#img8" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/search-magnifier-interface-symbol.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <Text fill="#340049" layoutX="140.0" layoutY="467.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Búsqueda">
+               <font>
+                  <Font name="Candara Light" size="20.0" />
+               </font>
+               <effect>
+                  <Bloom />
+               </effect>
+            </Text>
+            <ImageView fx:id="img2" fitHeight="29.0" fitWidth="23.0" layoutX="166.0" layoutY="206.0" onMouseClicked="#img2" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/restaurant%202.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="img3" fitHeight="50.0" fitWidth="88.0" layoutX="348.0" layoutY="148.0" onMouseClicked="#img3" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/two-cogwheels-configuration-interface-symbol.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="img5" fitHeight="29.0" fitWidth="23.0" layoutX="375.0" layoutY="205.0" onMouseClicked="#img5" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/carrito-de-compras%202.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <Text fill="#340049" layoutX="309.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mantenimiento">
+               <font>
+                  <Font name="Candara Light" size="20.0" />
+               </font>
+               <effect>
+                  <Bloom />
+               </effect>
+            </Text>
+            <Text fill="#340049" layoutX="289.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Restaurantes/Supermercados" wrappingWidth="167.43310546875">
+               <font>
+                  <Font name="Cambria" size="13.0" />
+               </font>
+               <effect>
+                  <Bloom />
+               </effect>
+            </Text>
+            <ImageView fx:id="img6" fitHeight="50.0" fitWidth="88.0" layoutX="542.0" layoutY="148.0" onMouseClicked="#img6" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/two-cogwheels-configuration-interface-symbol.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="img1" fitHeight="50.0" fitWidth="88.0" layoutX="153.0" layoutY="148.0" onMouseClicked="#img1" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/two-cogwheels-configuration-interface-symbol.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <Text fill="#340049" layoutX="508.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mantenimiento">
+               <font>
+                  <Font name="Candara Light" size="20.0" />
+               </font>
+               <effect>
+                  <Bloom />
+               </effect>
+            </Text>
+            <Text fill="#340049" layoutX="489.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Productos" textAlignment="CENTER" wrappingWidth="167.43310546875">
+               <font>
+                  <Font name="Cambria" size="13.0" />
+               </font>
+               <effect>
+                  <Bloom />
+               </effect>
+            </Text>
+            <Text fill="#340049" layoutX="117.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mantenimiento">
+               <font>
+                  <Font name="Candara Light" size="20.0" />
+               </font>
+               <effect>
+                  <Bloom />
+               </effect>
+            </Text>
+            <Text fill="#340049" layoutX="97.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comidas" textAlignment="CENTER" wrappingWidth="167.43310546875">
+               <font>
+                  <Font name="Cambria" size="13.0" />
+               </font>
+               <effect>
+                  <Bloom />
+               </effect>
+            </Text>
+            <ImageView fx:id="img4" fitHeight="22.0" fitWidth="25.0" layoutX="348.0" layoutY="206.0" onMouseClicked="#img4" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/restaurant%20(1).png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="img7" fitHeight="28.0" fitWidth="29.0" layoutX="553.0" layoutY="203.0" onMouseClicked="#img7" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/donacion-de-alimentos.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <Line endX="655.0" layoutX="98.0" layoutY="89.0" startX="-100.0" />
+            <Text fill="#340049" layoutX="286.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Administración">
+               <font>
+                  <Font name="Candara Light" size="28.0" />
+               </font>
+               <effect>
+                  <Bloom />
+               </effect>
+            </Text>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

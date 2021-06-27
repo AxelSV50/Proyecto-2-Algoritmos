@@ -5,17 +5,23 @@
  */
 package main.menu;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import main.security.SecurityFXMLController;
 
 /**
  * FXML Controller class
@@ -27,11 +33,13 @@ public class MenuFXMLController implements Initializable {
     @FXML
     private BorderPane bp;
     @FXML
+    private Button btnExit;
+    @FXML
     private ImageView img9;
     @FXML
     private Circle circle4;
     @FXML
-    private Button btnExit;
+    private Button btnLogout;
     @FXML
     private Circle circle2;
     @FXML
@@ -56,8 +64,6 @@ public class MenuFXMLController implements Initializable {
     private ImageView img4;
     @FXML
     private ImageView img7;
-    @FXML
-    private Button btnLogout;
 
     /**
      * Initializes the controller class.
@@ -68,9 +74,6 @@ public class MenuFXMLController implements Initializable {
     }
 
     
-    @FXML
-    private void managemenPlaces(MouseEvent event) {
-    }
 
     @FXML
     private void managementSearch(MouseEvent event) {
@@ -89,8 +92,16 @@ public class MenuFXMLController implements Initializable {
     }
 
     @FXML
-    private void managementReports(MouseEvent event) {
+    private void managemenPlaces(MouseEvent event) {
+        
+        loadPage("/main/places/PlacesFXML");
     }
+
+    @FXML
+    private void managementReports(MouseEvent event) {
+        
+    }
+  
 
     @FXML
     private void btnExit(ActionEvent event) {
@@ -152,6 +163,19 @@ public class MenuFXMLController implements Initializable {
         managementProducts(event);
 
     }
-  
+
+    private void loadPage(String page) {
+
+        Parent root = null;
+
+        try {
+
+            root = FXMLLoader.load(getClass().getResource(page + ".fxml"));
+
+        } catch (IOException ex) {
+            Logger.getLogger(SecurityFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.bp.setRight(root);
+    }
 
 }

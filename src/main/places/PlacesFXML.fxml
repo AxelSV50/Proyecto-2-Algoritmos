@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="749.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.places.PlacesFXMLController">
+   <bottom>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EDEDED;" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="tablePlacesToSelect" layoutX="114.0" layoutY="142.0" prefHeight="272.0" prefWidth="527.0">
+              <columns>
+                <TableColumn fx:id="colPlaceToSelect" editable="false" prefWidth="399.0" resizable="false" text="lugar" />
+                <TableColumn fx:id="colAddPlaceToSelect" editable="false" prefWidth="126.0" resizable="false" text="Agregar" />
+              </columns>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.41410818696022034" green="0.16081871092319489" blue="0.7236841917037964" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </TableView>
+            <Pane layoutX="-3.0" layoutY="-4.0" prefHeight="44.0" prefWidth="760.0" style="-fx-background-color: #340049;">
+               <children>
+                  <Button fx:id="btnExit1" layoutX="701.0" mnemonicParsing="false" onAction="#btnExit" style="-fx-background-color: Transparent;" text="🡆" textFill="WHITE">
+                     <font>
+                        <Font name="Yu Gothic Bold" size="21.0" />
+                     </font>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </Button>
+                  <Button fx:id="btnNewGraph" layoutX="21.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnNewGraph" prefHeight="25.0" prefWidth="79.0" style="-fx-background-color: Transparent;" text="Nuevo" textFill="WHITE" visible="false">
+                     <font>
+                        <Font name="Cambria" size="13.0" />
+                     </font>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </Button>
+               </children>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Pane>
+            <Line endX="655.0" layoutX="98.0" layoutY="89.0" startX="-100.0" />
+            <Text layoutX="259.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selección de lugares">
+               <font>
+                  <Font name="Candara Light" size="28.0" />
+               </font>
+               <effect>
+                  <Bloom />
+               </effect>
+            </Text>
+            <Pane layoutX="114.0" layoutY="142.0" prefHeight="24.0" prefWidth="527.0" style="-fx-background-color: #340049;">
+               <children>
+                  <Separator layoutX="398.0" orientation="VERTICAL" prefHeight="24.0" prefWidth="0.0" />
+                  <Text fill="WHITE" layoutX="115.0" layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lugares" textAlignment="CENTER" wrappingWidth="167.43310546875">
+                     <font>
+                        <Font name="Cambria" size="13.0" />
+                     </font>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </Text>
+                  <Text fill="WHITE" layoutX="405.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Agregar" textAlignment="CENTER" wrappingWidth="117.43310546875">
+                     <font>
+                        <Font name="Cambria" size="13.0" />
+                     </font>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </Text>
+               </children>
+            </Pane>
+            <Button fx:id="btnGenerateGraph" layoutX="318.0" layoutY="446.0" mnemonicParsing="false" onAction="#btnGenerateGraph" prefHeight="25.0" prefWidth="112.0" style="-fx-background-color: #340049;" text="Generar" textFill="WHITE">
+               <font>
+                  <Font name="Cambria" size="13.0" />
+               </font>
+               <effect>
+                  <Reflection topOpacity="0.24" />
+               </effect>
+            </Button>
+            <Text layoutX="253.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nota: Debe agregar al menos 10 lugares">
+               <font>
+                  <Font name="Candara Light" size="15.0" />
+               </font>
+               <effect>
+                  <Bloom />
+               </effect>
+            </Text>
+            <Pane fx:id="panePlaces" layoutY="49.0" prefHeight="488.0" prefWidth="749.0" style="-fx-background-color: #EDEDED;" visible="false">
+               <children>
+                  <TableView fx:id="tablePlacesGraph" layoutX="449.0" layoutY="77.0" prefHeight="334.0" prefWidth="286.0">
+                     <columns>
+                        <TableColumn fx:id="colOriginDestinyGraph" editable="false" prefWidth="195.0" resizable="false" text="Origen-Destino" />
+                        <TableColumn fx:id="colDistanceGraph" editable="false" prefWidth="91.0" resizable="false" text="Distancia" />
+                     </columns>
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color red="0.4156862795352936" green="0.16078431904315948" blue="0.7254902124404907" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </TableView>
+                  <Pane layoutX="448.0" layoutY="77.0" prefHeight="25.0" prefWidth="287.0" style="-fx-background-color: #340049;">
+                     <children>
+                        <Separator layoutX="190.0" layoutY="1.0" orientation="VERTICAL" prefHeight="24.0" prefWidth="15.0" />
+                        <Text fill="WHITE" layoutX="27.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Origen-Destino" textAlignment="CENTER" wrappingWidth="136.43310546875">
+                           <font>
+                              <Font name="Cambria" size="13.0" />
+                           </font>
+                           <effect>
+                              <Bloom />
+                           </effect>
+                        </Text>
+                        <Text fill="WHITE" layoutX="212.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Distancia" textAlignment="CENTER" wrappingWidth="66.43310546875">
+                           <font>
+                              <Font name="Cambria" size="13.0" />
+                           </font>
+                           <effect>
+                              <Bloom />
+                           </effect>
+                        </Text>
+                     </children>
+                  </Pane>
+                  <Button fx:id="btnRandomDistance" layoutX="319.0" layoutY="425.0" mnemonicParsing="false" onAction="#btnRandomDistance" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #340049;" text="Distancias aleatorias" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria" size="11.0" />
+                     </font>
+                     <effect>
+                        <Reflection topOpacity="0.24" />
+                     </effect>
+                  </Button>
+                  <Text layoutX="332.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lugares">
+                     <font>
+                        <Font name="Candara Light" size="28.0" />
+                     </font>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </Text>
+                  <Line endX="669.0" layoutX="91.0" layoutY="40.0" startX="-100.0" />
+                  <ScrollPane layoutX="24.0" layoutY="77.0" prefHeight="337.0" prefWidth="409.0">
+                    <content>
+                      <AnchorPane fx:id="panePlacesGraph" minHeight="0.0" minWidth="0.0" prefHeight="792.0" prefWidth="879.0" style="-fx-background-color: white;" />
+                    </content>
+                  </ScrollPane>
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </bottom>
+</BorderPane>

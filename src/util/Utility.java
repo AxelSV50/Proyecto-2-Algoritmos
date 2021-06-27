@@ -60,7 +60,7 @@ public class Utility {
 
     public static int random(int bound) {
         //return 1+random.nextInt(bound);
-        return 1 + (int) Math.floor(Math.random() * bound);
+        return (int) Math.floor(Math.random() * bound);
     }
 
     public static String format(double value) {

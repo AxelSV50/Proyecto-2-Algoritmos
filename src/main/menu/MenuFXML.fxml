@@ -15,8 +15,8 @@
 <?import javafx.scene.text.Text?>
 
 <BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="749.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.menu.MenuFXMLController">
-   <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: WHITE;" BorderPane.alignment="CENTER">
+   <bottom>
+      <AnchorPane prefHeight="539.0" prefWidth="754.0" style="-fx-background-color: WHITE;" BorderPane.alignment="CENTER">
          <children>
             <ImageView fx:id="img9" fitHeight="106.0" fitWidth="107.0" layoutX="322.0" layoutY="334.0" onMouseClicked="#managemenPlaces" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -31,7 +31,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Circle>
-            <Pane layoutX="-2.0" prefHeight="40.0" prefWidth="755.0" style="-fx-background-color: #340049;">
+            <Pane layoutX="-2.0" prefHeight="40.0" prefWidth="757.0" style="-fx-background-color: #340049;">
                <children>
                   <Button fx:id="btnExit" layoutX="141.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnExit" style="-fx-background-color: Transparent;" text="Salir" textFill="WHITE">
                      <font>
@@ -224,5 +224,5 @@
             </Text>
          </children>
       </AnchorPane>
-   </center>
+   </bottom>
 </BorderPane>

@@ -73,8 +73,6 @@ public class MenuFXMLController implements Initializable {
         // TODO
     }
 
-    
-
     @FXML
     private void managementSearch(MouseEvent event) {
     }
@@ -89,19 +87,21 @@ public class MenuFXMLController implements Initializable {
 
     @FXML
     private void managementFood(MouseEvent event) {
+
+        loadPage("/main/food/FoodFXML");
+
     }
 
     @FXML
     private void managemenPlaces(MouseEvent event) {
-        
+
         loadPage("/main/places/PlacesFXML");
     }
 
     @FXML
     private void managementReports(MouseEvent event) {
-        
+
     }
-  
 
     @FXML
     private void btnExit(ActionEvent event) {
@@ -115,7 +115,6 @@ public class MenuFXMLController implements Initializable {
         bp.setVisible(false);
     }
 
-    
     @FXML
     private void img8(MouseEvent event) {
 

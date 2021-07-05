@@ -5,6 +5,8 @@
  */
 package domain.bst;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Profesor Gilberth Chaves A <gchavesav@ucr.ac.cr>
@@ -271,4 +273,45 @@ public class BST implements Tree {
         return resta <= 1;
     }
     
-}
+    public  ArrayList<Object> preOrder2() throws TreeException {
+        ArrayList<Object> bstList = new ArrayList<Object>();
+        if (isEmpty()) {
+           
+        }
+       preOrder2(root,bstList);
+        return  bstList;
+    }
+
+    //Tranversal tour: N-L-R
+    private Object preOrder2(BTreeNode node,ArrayList<Object> bstList) {
+        String result = "";
+        if (node != null) {
+            bstList.add(node.data);
+          
+            result = node.data + " ";
+            result += preOrder2(node.left,bstList);
+            result += preOrder2(node.right,bstList);
+        }
+        return result;
+    }
+    
+    public int height2() throws TreeException {
+        if (isEmpty()) {
+            throw new TreeException("Binary Tree is empty");
+        }
+        return height2(root, 0);
+    }
+
+    private int height2(BTreeNode node, int count) {
+        if (node == null) {
+            return 0;
+        } else if (node.left == null && node.right == null) {
+            return count;
+        } else {
+            return Math.max(height2(node.left, ++count),
+                    height2(node.right, count));
+
+        }
+    }
+    
+} // Fin de clase

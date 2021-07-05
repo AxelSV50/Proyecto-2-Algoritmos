@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="513.0" prefWidth="777.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.food.FoodFXMLController">
+   <right>
+      <AnchorPane fx:id="ac" prefHeight="513.0" prefWidth="63.0" style="-fx-background-color: WHITE;" BorderPane.alignment="CENTER">
+         <children>
+            <Pane fx:id="panelAddFood" layoutX="213.0" layoutY="116.0" prefHeight="294.0" prefWidth="347.0" visible="false">
+               <children>
+                  <TextField fx:id="tfAddFoodId" disable="true" layoutX="141.0" layoutY="36.0" onKeyPressed="#tfAddCourseId" prefHeight="25.0" prefWidth="140.0" />
+                  <Text layoutX="44.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Identificador:" wrappingWidth="83.83282470703125">
+                     <font>
+                        <Font name="Yu Gothic Regular" size="13.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="44.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre:" wrappingWidth="89.6328125">
+                     <font>
+                        <Font name="Yu Gothic Regular" size="13.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="tfAddNameFood" layoutX="141.0" layoutY="75.0" onKeyPressed="#tfAddNameCourse" prefHeight="25.0" prefWidth="139.0" />
+                  <Button fx:id="btnAdd" layoutX="121.0" layoutY="226.0" mnemonicParsing="false" onAction="#btnAdd" style="-fx-background-color: #340049;" text="Agregar" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria" size="13.0" />
+                     </font>
+                     <effect>
+                        <Reflection topOpacity="0.2" />
+                     </effect></Button>
+                  <Text layoutX="44.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Precio:" wrappingWidth="69.6328125">
+                     <font>
+                        <Font name="Yu Gothic Regular" size="13.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="44.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Restaurantes:" wrappingWidth="89.6328125">
+                     <font>
+                        <Font name="Yu Gothic Regular" size="13.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="tfAddPriceFood" layoutX="141.0" layoutY="114.0" onKeyPressed="#tfAddPriceFood" prefHeight="25.0" prefWidth="139.0" />
+                  <ComboBox fx:id="comboBoxFoodAdd" layoutX="141.0" layoutY="151.0" prefHeight="18.0" prefWidth="140.0" />
+                  <Button fx:id="btnCancel" layoutX="211.0" layoutY="226.0" mnemonicParsing="false" onAction="#btnCancel" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: #340049;" text="Cancelar" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria" size="13.0" />
+                     </font>
+                     <effect>
+                        <Reflection topOpacity="0.2" />
+                     </effect></Button>
+               </children>
+            </Pane>
+            <Text fx:id="txtTitle" layoutX="301.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lista de comidas" textAlignment="CENTER">
+               <font>
+                  <Font name="Candara Light" size="28.0" />
+               </font>
+            </Text>
+            <Pane fx:id="panelDeleteFood" layoutX="194.0" layoutY="136.0" prefHeight="120.0" prefWidth="374.0" visible="false">
+               <children>
+                  <Text layoutX="27.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Identificación:" wrappingWidth="86.6328125">
+                     <font>
+                        <Font name="Yu Gothic Regular" size="13.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="tfRemoveIdFood" layoutX="121.0" layoutY="35.0" onKeyPressed="#tfRemoveIdFood" prefHeight="25.0" prefWidth="182.0" />
+                  <Button fx:id="btnDelete" layoutX="315.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnDelete" style="-fx-background-color: #340049;" text="Eliminar" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria" size="13.0" />
+                     </font>
+                     <effect>
+                        <Reflection topOpacity="0.15" />
+                     </effect></Button>
+               </children>
+            </Pane>
+            <TableView fx:id="foodTable" layoutX="64.0" layoutY="124.0" prefHeight="326.0" prefWidth="673.0" visible="false">
+               <columns>
+                  <TableColumn fx:id="colIdFood" editable="false" prefWidth="103.0" text="Id" />
+                  <TableColumn fx:id="colNameFood" editable="false" prefWidth="221.0" text="Nombre" />
+                  <TableColumn fx:id="colPriceFood" editable="false" prefWidth="134.0" text="Precio" />
+                  <TableColumn fx:id="colRestaurantFood" editable="false" prefWidth="215.0" text="Restaurante" />
+               </columns>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.4156862795352936" green="0.16078431904315948" blue="0.7254902124404907" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </TableView>
+            <Pane fx:id="panelModifyFood" layoutX="145.0" layoutY="168.0" prefHeight="345.0" prefWidth="511.0" visible="false">
+               <children>
+                  <TextField fx:id="tfNameFoodModify" disable="true" layoutX="195.0" layoutY="100.0" prefHeight="25.0" prefWidth="140.0" />
+                  <Text layoutX="105.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre:" wrappingWidth="71.23284912109375">
+                     <font>
+                        <Font name="Yu Gothic Regular" size="13.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="105.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Precio:" wrappingWidth="72.6328125">
+                     <font>
+                        <Font name="Yu Gothic Regular" size="13.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="tfPriceFoodModify" disable="true" layoutX="195.0" layoutY="137.0" onKeyPressed="#tfNameCourseModify" prefHeight="25.0" prefWidth="139.0" />
+                  <Button fx:id="btnUpdate" disable="true" layoutX="181.0" layoutY="239.0" mnemonicParsing="false" onAction="#btnUpdate" style="-fx-background-color: #340049;" text="Actualizar" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria" size="13.0" />
+                     </font></Button>
+                  <Text layoutX="105.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Restaurante:" wrappingWidth="78.6328125">
+                     <font>
+                        <Font name="Yu Gothic Regular" size="13.0" />
+                     </font>
+                  </Text>
+                  <ComboBox fx:id="comboBoxFoodModify" disable="true" layoutX="195.0" layoutY="175.0" prefHeight="19.0" prefWidth="140.0" />
+                  <Button fx:id="btnCancelModify" disable="true" layoutX="282.0" layoutY="239.0" mnemonicParsing="false" onAction="#btnCancelModify" prefHeight="25.0" prefWidth="73.0" style="-fx-background-color: #340049;" text="Cancelar" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria" size="13.0" />
+                     </font></Button>
+                  <Text layoutX="200.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nuevos datos:" underline="true" wrappingWidth="129.6328125">
+                     <font>
+                        <Font name="Yu Gothic Bold" size="13.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="tfSearchFoodUpdate" layoutX="195.0" layoutY="14.0" onKeyPressed="#tfSearchFoodUpdate" prefHeight="25.0" prefWidth="140.0" />
+                  <Text layoutX="100.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Identificador:" wrappingWidth="83.43280029296875">
+                     <font>
+                        <Font name="Yu Gothic Regular" size="13.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="btnSearchFoodUpdate" layoutX="349.0" layoutY="13.0" mnemonicParsing="false" onAction="#btnSearchFoodUpdate" style="-fx-background-color: #340049;" text="🔎" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria" size="13.0" />
+                     </font></Button>
+               </children>
+            </Pane>
+            <Pane prefHeight="38.0" prefWidth="777.0" style="-fx-background-color: #340049;">
+               <children>
+                  <Button fx:id="btnBack" layoutX="716.0" layoutY="-2.0" mnemonicParsing="false" onAction="#btnBack" style="-fx-background-color: Transparent;" text="🡆" textFill="WHITE">
+                     <font>
+                        <Font name="Yu Gothic Bold" size="21.0" />
+                     </font>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </Button>
+                  <Button fx:id="btnAddFood" layoutX="57.0" layoutY="6.0" mnemonicParsing="false" onAction="#btnAddFood" prefHeight="25.0" prefWidth="66.0" style="-fx-background-color: Transparent;" text="Agregar" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria" size="13.0" />
+                     </font>
+                     <effect>
+                        <Bloom threshold="0.17" />
+                     </effect>
+                  </Button>
+                  <Button fx:id="btnDeleteFood" layoutX="140.0" layoutY="6.0" mnemonicParsing="false" onAction="#btnDeleteFood" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: Transparent;" text="Suprimir" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria" size="13.0" />
+                     </font>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </Button>
+                  <Button fx:id="btnModifyFood" layoutX="229.0" layoutY="6.0" mnemonicParsing="false" onAction="#btnModifyFood" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: Transparent;" text="Modificar" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria" size="13.0" />
+                     </font>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </Button>
+                  <Button fx:id="btnShowFood" layoutX="325.0" layoutY="6.0" mnemonicParsing="false" onAction="#btnShowFood" prefHeight="25.0" prefWidth="64.0" style="-fx-background-color: Transparent;" text="Mostrar" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria" size="13.0" />
+                     </font>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </Button>
+               </children>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Pane>
+            <Line endX="759.0" endY="90.0" layoutX="16.0" layoutY="-2.0" startX="-23.0" startY="90.0" />
+            <Pane fx:id="foodTablePane" layoutX="64.0" layoutY="124.0" prefHeight="24.0" prefWidth="673.0" style="-fx-background-color: #340049;" visible="false">
+               <children>
+                  <Separator layoutX="457.0" orientation="VERTICAL" prefHeight="24.0" prefWidth="6.0" />
+                  <Text fill="WHITE" layoutX="24.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id" textAlignment="CENTER" wrappingWidth="54.43310546875">
+                     <font>
+                        <Font name="Cambria" size="13.0" />
+                     </font>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </Text>
+                  <Text fill="WHITE" layoutX="507.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Restaurante" textAlignment="CENTER" wrappingWidth="117.43310546875">
+                     <font>
+                        <Font name="Cambria" size="13.0" />
+                     </font>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </Text>
+                  <Separator layoutX="322.0" layoutY="1.0" orientation="VERTICAL" prefHeight="24.0" prefWidth="5.0" />
+                  <Text fill="WHITE" layoutX="163.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" textAlignment="CENTER" wrappingWidth="99.43310546875">
+                     <font>
+                        <Font name="Cambria" size="13.0" />
+                     </font>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </Text>
+                  <Separator layoutX="102.0" orientation="VERTICAL" prefHeight="24.0" prefWidth="0.0" />
+                  <Text fill="WHITE" layoutX="348.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Precio" textAlignment="CENTER" wrappingWidth="84.43310546875">
+                     <font>
+                        <Font name="Cambria" size="13.0" />
+                     </font>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </Text>
+               </children>
+            </Pane>
+            <Text fx:id="txtError" fill="#b20000" layoutX="268.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="251.6328125">
+               <font>
+                  <Font name="Yu Gothic Bold" size="10.0" />
+               </font>
+            </Text>
+            <Text fx:id="txtAdded" fill="#009a39" layoutX="261.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="251.6328125">
+               <font>
+                  <Font name="Yu Gothic Bold" size="10.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>

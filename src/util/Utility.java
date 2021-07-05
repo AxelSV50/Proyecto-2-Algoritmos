@@ -5,6 +5,8 @@
  */
 package util;
 
+import domain.Food;
+import domain.Product;
 import domain.bst.BST;
 import domain.list.CircularDoublyLinkedList;
 
@@ -18,14 +20,24 @@ import java.util.Date;
  * @author Profesor Lic. Gilberth Chaves Avila
  */
 public class Utility {
-
+    
+    private static BST bstFood;
     private static BST bstProduct;
     private static SinglyLinkedList studentsList;
     private static CircularDoublyLinkedList coursesList;
     private static CircularDoublyLinkedList enrollmentList;
     private static CircularDoublyLinkedList deEnrollmentList;
     private static SinglyLinkedList timeTableList;
-
+    
+    public static BST getBstFood() {
+        bstFood = data.FileManagementFoods.getBstFood();
+        return bstFood;
+    }
+    
+    public static BST getBstProduct() {
+        bstProduct = data.FileManagementProduct.getBstProduct();
+        return bstProduct;
+    }
    
 //
 //    //Tiene los estudiantes agregados
@@ -97,7 +109,14 @@ public class Utility {
                 String s2 = (String) b;
                 //return s1.compareTo(s2)==0; //OPCION 1
                 return s1.equalsIgnoreCase(s2); //OPCION 2
-     
+            case "food":
+                Food f1 = (Food) a;
+                Food f2 = (Food) b;
+                return f1.getId()== f2.getId();
+            case "product":
+                Product p1 = (Product) a;
+                Product p2 = (Product) b;
+                return p1.getAutoId() == p2.getAutoId();
         }//revisar esta condicion
         return false; //en cualquier otro caso
     }
@@ -109,7 +128,12 @@ public class Utility {
         if (a instanceof String && b instanceof String) {
             return "string";
         }
-     
+        if (a instanceof Food && b instanceof Food) {
+            return "food";
+        }
+        if (a instanceof Product && b instanceof Product) {
+            return "product";
+        }
         return "unknown"; //desconocido
     }
 

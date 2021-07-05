@@ -28,7 +28,7 @@
                <effect>
                   <DropShadow>
                      <color>
-                        <Color red="0.41410818696022034" green="0.16081871092319489" blue="0.7236841917037964" />
+                        <Color red="0.4156862795352936" green="0.16078431904315948" blue="0.7254902124404907" />
                      </color>
                   </DropShadow>
                </effect>
@@ -56,7 +56,7 @@
                   <DropShadow />
                </effect>
             </Pane>
-            <Line endX="655.0" layoutX="98.0" layoutY="89.0" startX="-100.0" />
+            <Line endX="655.0" layoutX="98.0" layoutY="89.0" startX="-98.0" />
             <Text layoutX="259.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selección de lugares">
                <font>
                   <Font name="Candara Light" size="28.0" />

@@ -112,7 +112,7 @@ public class Utility {
             case "food":
                 Food f1 = (Food) a;
                 Food f2 = (Food) b;
-                return f1.getId()== f2.getId();
+                return f1.getId()== f2.getId() || (f1.getId()== f2.getId()&&f1.getRestaurantID()==f2.getRestaurantID());
             case "product":
                 Product p1 = (Product) a;
                 Product p2 = (Product) b;
@@ -147,7 +147,10 @@ public class Utility {
                 String s1 = (String) a;
                 String s2 = (String) b;
                 return s1.compareTo(s2) < 0;
-
+  case "food":
+                Food f1 = (Food) a;
+                Food f2 = (Food) b;
+                return (f1.getId()) < (f2.getId());
         }
         return false; //en cualquier otro caso
     }
@@ -163,7 +166,10 @@ public class Utility {
                 String s2 = (String) b;
                 return s1.compareTo(s2) > 0;
   
-
+     case "food":
+                Food f1 = (Food) a;
+                Food f2 = (Food) b;
+                return (f1.getId()) > (f2.getId());
         }
         return false; //en cualquier otro caso
     }
@@ -171,8 +177,39 @@ public class Utility {
     public static boolean equals2(Object a, Object b) {
 
         switch (instanceOf(a, b)) {
-        }//revisar esta condicion
 
+            case "integer":
+                Integer x = (Integer) a;
+                Integer y = (Integer) b;
+                return x.equals(y);
+            case "string":
+                String s1 = (String) a;
+                String s2 = (String) b;
+                //return s1.compareTo(s2)==0; //OPCION 1
+                return s1.equalsIgnoreCase(s2); //OPCION 2
+            case "food":
+                Food f1 = (Food) a;
+                Food f2 = (Food) b;
+                return (f1.getName()).equalsIgnoreCase(f2.getName()) && f1.getRestaurantID()==f2.getRestaurantID();
+
+        }//revisar esta condicion
+        return false; //en cualquier otro caso
+    }
+ public static boolean lessT2(Object a, Object b) {
+        switch (instanceOf(a, b)) {
+            case "integer":
+                Integer x = (Integer) a;
+                Integer y = (Integer) b;
+                return x < y;
+            case "string":
+                String s1 = (String) a;
+                String s2 = (String) b;
+                return s1.compareTo(s2) < 0;
+            case "food":
+                Food f1 = (Food) a;
+                Food f2 = (Food) b;
+                return (f1.getName()).compareTo(f2.getName()) <0 &&f1.getRestaurantID() <f2.getRestaurantID() ;
+        }
         return false; //en cualquier otro caso
     }
 

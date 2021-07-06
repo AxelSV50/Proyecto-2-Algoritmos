@@ -6,8 +6,9 @@
 package data;
 
 import domain.Food;
-import domain.bst.BST;
 
+import domain.bst.BST;
+import domain.bst.BTreeNode;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -65,19 +66,12 @@ public class FileManagementFoods {
             if (!bstFood.isEmpty()) {
                 bstList = bstFood.preOrder2();
                 for (int i = 0; i < bstList.size(); i++) {
-
-                 
-                        Food f = (Food) bstList.get(i);
-                        System.out.println(f.getId());
-                        bw.write(f.getId() + "~" + f.getName() + "~" + f.getPrice() + "~" + f.getRestaurantID() + "\n");
-
-                    
+                    Food f = (Food) bstList.get(i);
+                    bw.write(f.getId() + "~" + f.getName() + "~" + f.getPrice() + "~" + f.getRestaurantID() + "\n");
                 }
                 bw.close();
-
             }
         } catch (Exception e) {
-
             e.printStackTrace();
         }
         return true;

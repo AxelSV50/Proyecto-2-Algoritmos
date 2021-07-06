@@ -23,7 +23,7 @@
          <children>
             <Pane fx:id="panelAddFood" layoutX="213.0" layoutY="116.0" prefHeight="294.0" prefWidth="347.0" visible="false">
                <children>
-                  <TextField fx:id="tfAddFoodId" disable="true" layoutX="141.0" layoutY="36.0" onKeyPressed="#tfAddCourseId" prefHeight="25.0" prefWidth="140.0" />
+                  <TextField fx:id="tfAddFoodId" disable="true" layoutX="141.0" layoutY="36.0" onKeyPressed="#tfAddFoodId" prefHeight="25.0" prefWidth="140.0" />
                   <Text layoutX="44.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Identificador:" wrappingWidth="83.83282470703125">
                      <font>
                         <Font name="Yu Gothic Regular" size="13.0" />
@@ -34,7 +34,7 @@
                         <Font name="Yu Gothic Regular" size="13.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="tfAddNameFood" layoutX="141.0" layoutY="75.0" onKeyPressed="#tfAddNameCourse" prefHeight="25.0" prefWidth="139.0" />
+                  <TextField fx:id="tfAddNameFood" layoutX="141.0" layoutY="75.0" onKeyPressed="#tfAddNameFood" prefHeight="25.0" prefWidth="139.0" />
                   <Button fx:id="btnAdd" layoutX="121.0" layoutY="226.0" mnemonicParsing="false" onAction="#btnAdd" style="-fx-background-color: #340049;" text="Agregar" textFill="WHITE">
                      <font>
                         <Font name="Cambria" size="13.0" />
@@ -102,7 +102,7 @@
             </TableView>
             <Pane fx:id="panelModifyFood" layoutX="145.0" layoutY="168.0" prefHeight="345.0" prefWidth="511.0" visible="false">
                <children>
-                  <TextField fx:id="tfNameFoodModify" disable="true" layoutX="195.0" layoutY="100.0" prefHeight="25.0" prefWidth="140.0" />
+                  <TextField fx:id="tfNameFoodModify" disable="true" layoutX="195.0" layoutY="100.0" onKeyPressed="#tfNameFoodModify" prefHeight="25.0" prefWidth="140.0" />
                   <Text layoutX="105.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre:" wrappingWidth="71.23284912109375">
                      <font>
                         <Font name="Yu Gothic Regular" size="13.0" />
@@ -113,7 +113,7 @@
                         <Font name="Yu Gothic Regular" size="13.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="tfPriceFoodModify" disable="true" layoutX="195.0" layoutY="137.0" onKeyPressed="#tfNameCourseModify" prefHeight="25.0" prefWidth="139.0" />
+                  <TextField fx:id="tfPriceFoodModify" disable="true" layoutX="195.0" layoutY="137.0" onKeyPressed="#tfPriceFoodModify" prefHeight="25.0" prefWidth="139.0" />
                   <Button fx:id="btnUpdate" disable="true" layoutX="181.0" layoutY="239.0" mnemonicParsing="false" onAction="#btnUpdate" style="-fx-background-color: #340049;" text="Actualizar" textFill="WHITE">
                      <font>
                         <Font name="Cambria" size="13.0" />

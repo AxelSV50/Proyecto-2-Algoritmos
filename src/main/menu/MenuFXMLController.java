@@ -83,6 +83,9 @@ public class MenuFXMLController implements Initializable {
 
     @FXML
     private void managementProducts(MouseEvent event) {
+
+        loadPage("/main/product/ProductFXML");
+
     }
 
     @FXML

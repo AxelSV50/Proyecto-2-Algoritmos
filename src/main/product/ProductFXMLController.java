@@ -80,8 +80,6 @@ public class ProductFXMLController implements Initializable {
     @FXML
     private TextField tfRemoveProductId;
     @FXML
-    private TextField tfIdProductUpdate;
-    @FXML
     private TextField tfNameUpdate;
     @FXML
     private TableView<List<String>> tableProduct;
@@ -96,8 +94,6 @@ public class ProductFXMLController implements Initializable {
     @FXML
     private TextField tfSearchProductUpdate;
     @FXML
-    private Text txtProductSearchUpdate;
-    @FXML
     private Button btnSearchProductUpdate;
     @FXML
     private Pane panelAddProduct;
@@ -111,12 +107,15 @@ public class ProductFXMLController implements Initializable {
     private TextField tfAddPrecio;
     @FXML
     private TextField tfPriceUpdate;
-    private TextField tfIdSupermarketUpdate;
     @FXML
     private ComboBox<String> cbIdSupermarketUpdate;
     @FXML
     private ComboBox<String> cbIdSupermarket;
 //    private AdjacencyListGraph studentList = util.Utility.getRestYSuperGraph();
+    @FXML
+    private Pane foodTablePane;
+    @FXML
+    private Button btnCancel;
 
     /**
      * Initializes the controller class.
@@ -170,7 +169,7 @@ public class ProductFXMLController implements Initializable {
                 } else {
 
                     //Si existe lanza este mensaje al usuario
-                    txtError.setText("La nombre de la comida ya está en uso");
+                    txtError.setText("El nombre del producto ya está en uso");
                     txtAdded.setText("");
 
                 }
@@ -231,9 +230,9 @@ public class ProductFXMLController implements Initializable {
                 String[] array = idRestaurant.split("-");
                 txtError.setText("");
                 Object newElement = new Product(Integer.parseInt(tfSearchProductUpdate.textProperty().getValue()), tfNameUpdate.textProperty().getValue(),
-                Double.parseDouble(tfPriceUpdate.textProperty().getValue()), Integer.parseInt(array[0]));
+                        Double.parseDouble(tfPriceUpdate.textProperty().getValue()), Integer.parseInt(array[0]));
                 Object oldElement = new Product(Integer.parseInt(tfSearchProductUpdate.textProperty().getValue()), "", 0, 0);
-                
+
                 if (bstProduct.contains(oldElement)) {
                     bstProduct.remove(oldElement);
                     bstProduct.add(newElement);
@@ -263,16 +262,12 @@ public class ProductFXMLController implements Initializable {
         panelAddProduct.setVisible(false);
         panelModificar.setVisible(false);
         panelDeleteProduct.setVisible(false);
-        tableProduct.setVisible(false);
         tfSearchProductUpdate.setVisible(false);
         btnSearchProductUpdate.setVisible(false);
-        txtProductSearchUpdate.setVisible(false);
         showProductPane.setVisible(false);
         tfRemoveProductId.setText("");
         tfAddName.setText("");
-        tfIdProductUpdate.setText("");
         tfNameUpdate.setText("");
-        tfIdProductUpdate.setDisable(true);
         tfNameUpdate.setDisable(true);
         btnUpdate.setDisable(true);
         tfSearchProductUpdate.setDisable(false);
@@ -298,7 +293,6 @@ public class ProductFXMLController implements Initializable {
 
     }
 
-    @FXML
     private void tfRemoveId(KeyEvent event) {
 
         txtAdded.setText("");
@@ -323,6 +317,7 @@ public class ProductFXMLController implements Initializable {
         }
     }
 
+    @FXML
     private void tfSearchProductUpdate(KeyEvent event) {
 
         txtAdded.setText("");
@@ -347,40 +342,14 @@ public class ProductFXMLController implements Initializable {
         }
     }
 
-    private void tfIdProductUpdate(KeyEvent event) {
-
-        txtAdded.setText("");
-
-        try {
-
-            char c = event.getText().charAt(0);
-
-            if (!Character.isDigit(c)) {
-
-                tfIdProductUpdate.setEditable(false);
-
-            } else {
-
-                tfIdProductUpdate.setEditable(true);
-            }
-
-        } catch (Exception e) {
-
-            tfIdProductUpdate.setEditable(true);
-
-        }
-    }
-
     @FXML
     private void btnUpdateCancel(ActionEvent event) {
 
         txtError.setText("");
         txtAdded.setText("");
-        tfIdProductUpdate.setText("");
         tfNameUpdate.setText("");
         tfSearchProductUpdate.setText("");
         tfSearchProductUpdate.setDisable(false);
-        tfIdProductUpdate.setDisable(true);
         tfNameUpdate.setDisable(true);
         btnUpdate.setDisable(true);
         btnUpdateCancel.setDisable(true);
@@ -407,7 +376,6 @@ public class ProductFXMLController implements Initializable {
         panelModificar.setVisible(true);
         tfSearchProductUpdate.setVisible(true);
         btnSearchProductUpdate.setVisible(true);
-        txtProductSearchUpdate.setVisible(true);
         txtTitle.setText("Modificar producto");
     }
 
@@ -415,50 +383,65 @@ public class ProductFXMLController implements Initializable {
     private void btnShowProduct(ActionEvent event) throws TreeException {
         cleanAll();
         initTable();
-        tableProduct.setVisible(true);
+        showProductPane.setVisible(true);
+        txtTitle.setText("Lista de productos");
     }
 
     @FXML
     private void btnSearchProductUpdate(ActionEvent event) throws TreeException {
         if (!tfSearchProductUpdate.textProperty().getValue().equals("")) {
 
-            ArrayList<Object> bstList = new ArrayList<Object>();
-            bstProduct = util.Utility.getBstProduct();
-            Product element = new Product(Integer.parseInt(tfSearchProductUpdate.textProperty().getValue()), "", 0, 0);
-            if (bstProduct.contains(element)) {
-                bstList = bstProduct.preOrder2();
-                for (int i = 0; i < bstList.size(); i++) {
-                    Product f = (Product) bstList.get(i);
-                    if (element.getAutoId()==f.getAutoId()) {
-                        
-                        tfNameUpdate.setText(f.getName());
-                        tfPriceUpdate.setText(f.getPrice() + "");
-                        cbIdSupermarketUpdate.setValue(f.getSupermarketID() + "");
-                        txtError.setText("");
-                        txtAdded.setText("");
-                        tfSearchProductUpdate.setDisable(true);
-                        btnUpdate.setDisable(false);
-                        btnUpdateCancel.setDisable(false);
-                        tfNameUpdate.setDisable(false);
-                        tfPriceUpdate.setDisable(false);
-                        cbIdSupermarketUpdate.setDisable(false);
-                        tfSearchProductUpdate.setDisable(false);
+            try {
+                ArrayList<Object> bstList = new ArrayList<Object>();
+                
+                bstProduct = util.Utility.getBstProduct();
+                Product element = new Product(Integer.parseInt(tfSearchProductUpdate.textProperty().getValue()), "", 0, 0);
+                
+                if (bstProduct.contains(element)) {
+                    
+                    bstList = bstProduct.preOrder2();
+                    for (int i = 0; i < bstList.size(); i++) {
+                        Product f = (Product) bstList.get(i);
+                        if (element.getAutoId() == f.getAutoId()) {
+
+                            tfNameUpdate.setText(f.getName());
+                            tfPriceUpdate.setText(f.getPrice() + "");
+                            cbIdSupermarketUpdate.setValue(f.getSupermarketID() + "");
+                            txtError.setText("");
+                            txtAdded.setText("");
+                            tfSearchProductUpdate.setDisable(true);
+                            btnUpdate.setDisable(false);
+                            btnUpdateCancel.setDisable(false);
+                            tfNameUpdate.setDisable(false);
+                            tfPriceUpdate.setDisable(false);
+                            cbIdSupermarketUpdate.setDisable(false);
+                            tfSearchProductUpdate.setDisable(false);
+                        }
                     }
+                } else {
+                    txtError.setText("Producto no encontrado");
+                    txtAdded.setText("");
+                    tfAddName.setText("");
+                    tfSearchProductUpdate.setText("");
+                    btnUpdate.setDisable(true);
                 }
-            } else {
-                txtError.setText("Producto no encontrada");
+            } catch (TreeException ex) {
+
+                txtError.setText("No hay productos agregados");
                 txtAdded.setText("");
-                tfAddName.setText("");
-                tfSearchProductUpdate.setText("");
-                btnUpdate.setDisable(true);
+
+            } catch (NumberFormatException ex) {
+                txtError.setText("El identificador debe ser numérico");
+                txtAdded.setText("");
             }
+
         } else {
             txtError.setText("Debe rellenar todos los recuadros");
             txtAdded.setText("");
 
         }
     }
-    
+
     private void initTable() {
         ObservableList<List<String>> tableContent = FXCollections.observableArrayList();
         ArrayList<Object> bstList = new ArrayList<Object>();
@@ -481,5 +464,29 @@ public class ProductFXMLController implements Initializable {
         }
         tableProduct.setItems(tableContent);
     } // Init
+
+    @FXML
+    private void btnCancel(ActionEvent event) {
+    }
+
+    @FXML
+    private void tfAddName(KeyEvent event) {
+    }
+
+    @FXML
+    private void tfAddPrecio(KeyEvent event) {
+    }
+
+    @FXML
+    private void tfRemoveProductId(KeyEvent event) {
+    }
+
+    @FXML
+    private void tfNameUpdate(KeyEvent event) {
+    }
+
+    @FXML
+    private void tfPriceUpdate(KeyEvent event) {
+    }
 
 } // Fin de clase

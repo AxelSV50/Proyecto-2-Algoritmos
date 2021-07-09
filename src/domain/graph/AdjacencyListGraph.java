@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domain;
+package domain.graph;
 
+import domain.*;
 import domain.list.ListException;
 import domain.queue.LinkedQueue;
 import domain.queue.QueueException;
@@ -137,18 +138,16 @@ public class AdjacencyListGraph implements Graph {
     @Override
     public void removeVertex(Object element) throws GraphException, ListException {
 
-            for (int i = 0; i < count; i++) {
-            if(util.Utility.equals(vertexList[i].data, element)){
+        for (int i = 0; i < count; i++) {
+            if (util.Utility.equals(vertexList[i].data, element)) {
                 //se deben suprimir todas las aristas asociadas
                 for (int j = 0; j < count; j++) {
-                    if(containsEdge(vertexList[j].data, element)){
+                    if (containsEdge(vertexList[j].data, element)) {
                         removeEdge(vertexList[j].data, element);
-                    } 
+                    }
                 }
                 //se debe suprimir el vertice
-                for (int j = i; j < count-1; j++) {
-                    vertexList[j] = vertexList[j+1];
-                }
+                vertexList[i] = null;
                 count--;
             }
         }
@@ -220,9 +219,11 @@ public class AdjacencyListGraph implements Graph {
     public String toString() {
         String result = "ADJACENCY LIST GRAPH CONTENT...";
         for (int i = 0; i < count; i++) {
-            result += "\nThe vertex in the position: " + i + " is: " + vertexList[i].data;
-            if (!vertexList[i].edgesList.isEmpty()) {
-                result += "\n....EDGES AND WEIGHTS:" + vertexList[i].edgesList.toString();
+            if (vertexList[i] != null) {
+                result += "\nThe vertex in the position: " + i + " is: " + vertexList[i].data;
+                if (!vertexList[i].edgesList.isEmpty()) {
+                    result += "\n....EDGES AND WEIGHTS:" + vertexList[i].edgesList.toString();
+                }
             }
         }
         return result;

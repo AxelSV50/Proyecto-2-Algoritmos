@@ -5,13 +5,17 @@
  */
 package domain;
 
-public class Supermarket {
+/**
+ *
+ * @author Usuario
+ */
+public class Restaurant {
 
     private int id;
     private String name;
     private String location;
-    
-    public Supermarket(int id, String name, String location) {
+
+    public Restaurant(int id, String name, String location) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -32,19 +36,16 @@ public class Supermarket {
     public void setLocation(String location) {
         this.location = location;
     }
-    
+
     public int getId() {
         return id;
     }
 
-    public void setAutoId(int autoId) {
+    public  void setAutoId(int autoId) {
         this.id = autoId;
     }
-
-    @Override
     public String toString() {
         return id+"~"+name+"~"+location;
     }
 
-    
-} // fin de clase
+}

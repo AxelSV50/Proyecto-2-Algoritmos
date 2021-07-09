@@ -6,11 +6,12 @@
 package util;
 
 import domain.Food;
+import domain.Place;
 import domain.Product;
+import domain.Restaurant;
+import domain.Supermarket;
 import domain.bst.BST;
-import domain.list.CircularDoublyLinkedList;
-
-import domain.list.SinglyLinkedList;
+import domain.graph.EdgeWeight;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,51 +21,19 @@ import java.util.Date;
  * @author Profesor Lic. Gilberth Chaves Avila
  */
 public class Utility {
-    
+
     private static BST bstFood;
     private static BST bstProduct;
-    private static SinglyLinkedList studentsList;
-    private static CircularDoublyLinkedList coursesList;
-    private static CircularDoublyLinkedList enrollmentList;
-    private static CircularDoublyLinkedList deEnrollmentList;
-    private static SinglyLinkedList timeTableList;
-    
+
     public static BST getBstFood() {
         bstFood = data.FileManagementFoods.getBstFood();
         return bstFood;
     }
-    
+
     public static BST getBstProduct() {
         bstProduct = data.FileManagementProduct.getBstProduct();
         return bstProduct;
     }
-   
-//
-//    //Tiene los estudiantes agregados
-//    public static SinglyLinkedList getStudentsList() {
-//        studentsList = data.FileManagementUsers.getStudentsList();
-//        return studentsList;
-//    }
-//
-//    public static CircularDoublyLinkedList getCoursesList() {
-//        coursesList = data.FileManagementCourses.getCoursesList();
-//        return coursesList;
-//    }
-//
-//    public static SinglyLinkedList getTimeTableList() {
-//        timeTableList = data.FileManagementTimeTable.getTimeTableList();
-//        return timeTableList;
-//    }
-//
-//    public static CircularDoublyLinkedList getEnrollmentList() {
-//        enrollmentList = data.FileManagementEnrollement.getEnrollmentList();
-//        return enrollmentList;
-//    }
-//
-//    public static CircularDoublyLinkedList getDeEnrollmentList() {
-//        deEnrollmentList = data.FileManagementEnrollement.getDeEnrollmentList();
-//        return deEnrollmentList;
-//    }
 
     public static int random() {
         return 1 + (int) Math.floor(Math.random() * 99);
@@ -112,11 +81,28 @@ public class Utility {
             case "food":
                 Food f1 = (Food) a;
                 Food f2 = (Food) b;
-                return f1.getId()== f2.getId() || (f1.getId()== f2.getId()&&f1.getRestaurantID()==f2.getRestaurantID());
+                return f1.getId() == f2.getId() || (f1.getId() == f2.getId() && f1.getRestaurantID() == f2.getRestaurantID());
             case "product":
                 Product p1 = (Product) a;
                 Product p2 = (Product) b;
-                return p1.getAutoId() == p2.getAutoId();
+                return p1.getId() == p2.getId();
+            case "place":
+                Place place1 = (Place) a;
+                Place place2 = (Place) b;
+                return place2.getAutoID() == place1.getAutoID();
+            case "restaurant":
+                Restaurant r1 = (Restaurant) a;
+                Restaurant r2 = (Restaurant) b;
+                return r1.getId() == r2.getId();
+            case "supermarket":
+                Supermarket su1 = (Supermarket) a;
+                Supermarket su2 = (Supermarket) b;
+                return su1.getId() == su2.getId();
+            case "edgeWeight":
+                EdgeWeight e1 = (EdgeWeight) a;
+                EdgeWeight e2 = (EdgeWeight) b;
+                return equals(e1.getEdge(), e2.getEdge());
+
         }//revisar esta condicion
         return false; //en cualquier otro caso
     }
@@ -134,6 +120,18 @@ public class Utility {
         if (a instanceof Product && b instanceof Product) {
             return "product";
         }
+        if (a instanceof Place && b instanceof Place) {
+            return "place";
+        }
+        if (a instanceof Restaurant && b instanceof Restaurant) {
+            return "restaurant";
+        }
+        if (a instanceof EdgeWeight && b instanceof EdgeWeight) {
+            return "edgeWeight";
+        }
+        if (a instanceof Supermarket && b instanceof Supermarket) {
+            return "supermarket";
+        }
         return "unknown"; //desconocido
     }
 
@@ -147,10 +145,14 @@ public class Utility {
                 String s1 = (String) a;
                 String s2 = (String) b;
                 return s1.compareTo(s2) < 0;
-  case "food":
+            case "food":
                 Food f1 = (Food) a;
                 Food f2 = (Food) b;
                 return (f1.getId()) < (f2.getId());
+            case "product":
+                Product p1 = (Product) a;
+                Product p2 = (Product) b;
+                return (p1.getId()) < (p2.getId());
         }
         return false; //en cualquier otro caso
     }
@@ -165,11 +167,14 @@ public class Utility {
                 String s1 = (String) a;
                 String s2 = (String) b;
                 return s1.compareTo(s2) > 0;
-  
-     case "food":
+            case "food":
                 Food f1 = (Food) a;
                 Food f2 = (Food) b;
                 return (f1.getId()) > (f2.getId());
+            case "product":
+                Product p1 = (Product) a;
+                Product p2 = (Product) b;
+                return (p1.getId()) > (p2.getId());
         }
         return false; //en cualquier otro caso
     }
@@ -190,12 +195,32 @@ public class Utility {
             case "food":
                 Food f1 = (Food) a;
                 Food f2 = (Food) b;
-                return (f1.getName()).equalsIgnoreCase(f2.getName()) && f1.getRestaurantID()==f2.getRestaurantID();
-
+                return (f1.getName()).equalsIgnoreCase(f2.getName()) && f1.getRestaurantID() == f2.getRestaurantID();
+            case "product":
+                Product p1 = (Product) a;
+                Product p2 = (Product) b;
+                return (p1.getName()).equalsIgnoreCase(p2.getName()) && p1.getSupermarketID() == p2.getSupermarketID();
         }//revisar esta condicion
         return false; //en cualquier otro caso
     }
- public static boolean lessT2(Object a, Object b) {
+
+    public static boolean equals3(Object a, Object b) {
+
+        switch (instanceOf(a, b)) {
+
+            case "food":
+                Food f1 = (Food) a;
+                Food f2 = (Food) b;
+                return f1.getRestaurantID() == f2.getRestaurantID();
+            case "product":
+                Product p1 = (Product) a;
+                Product p2 = (Product) b;
+                return p1.getSupermarketID() == p2.getSupermarketID();
+        }//revisar esta condicion
+        return false; //en cualquier otro caso
+    }
+
+    public static boolean lessT2(Object a, Object b) {
         switch (instanceOf(a, b)) {
             case "integer":
                 Integer x = (Integer) a;
@@ -208,9 +233,26 @@ public class Utility {
             case "food":
                 Food f1 = (Food) a;
                 Food f2 = (Food) b;
-                return (f1.getName()).compareTo(f2.getName()) <0 &&f1.getRestaurantID() <f2.getRestaurantID() ;
+                return (f1.getName()).compareTo(f2.getName()) < 0 && f1.getRestaurantID() < f2.getRestaurantID();
+            case "product":
+                Product p1 = (Product) a;
+                Product p2 = (Product) b;
+                return (p1.getName()).compareTo(p2.getName()) < 0 && p1.getSupermarketID() < p2.getSupermarketID();
         }
         return false; //en cualquier otro caso
     }
 
+    public static boolean lessT3(Object a, Object b) {
+        switch (instanceOf(a, b)) {
+            case "food":
+                Food f1 = (Food) a;
+                Food f2 = (Food) b;
+                return (f1.getRestaurantID()) < (f2.getRestaurantID());
+            case "product":
+                Product p1 = (Product) a;
+                Product p2 = (Product) b;
+                return (p1.getSupermarketID()) < (p2.getSupermarketID());
+        }
+        return false; //en cualquier otro caso    }
+    }
 }

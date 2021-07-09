@@ -6,10 +6,15 @@
 package main.places;
 
 import data.FileManagementPlaces;
-import domain.AdjacencyMatrixGraph;
-import domain.GraphException;
+import data.FileManagementRestSuper;
+import domain.Dijkstra;
+import domain.graph.AdjacencyMatrixGraph;
+import domain.graph.GraphException;
 import domain.Place;
-import domain.Vertex;
+import domain.Restaurant;
+import domain.Supermarket;
+import domain.graph.AdjacencyListGraph;
+import domain.graph.Vertex;
 import domain.list.ListException;
 import domain.list.SinglyLinkedList;
 import java.net.URL;
@@ -88,6 +93,7 @@ public class PlacesFXMLController implements Initializable {
     private ObservableList<List<String>> selectedPlacesTabledata;
     private SinglyLinkedList placesList;
     private AdjacencyMatrixGraph matrixGraph;
+    private AdjacencyListGraph graphRestSup;
 
     /**
      * Initializes the controller class.
@@ -97,8 +103,9 @@ public class PlacesFXMLController implements Initializable {
         // TODO
 
         placesList = FileManagementPlaces.getPlacesList();
-        matrixGraph = FileManagementPlaces.getPlacesGraph();
 
+        matrixGraph = FileManagementPlaces.getPlacesGraph();
+        graphRestSup = FileManagementRestSuper.getRestSupGraph();
         initTablePlaces();
 
         if (matrixGraph != null) {
@@ -147,7 +154,7 @@ public class PlacesFXMLController implements Initializable {
 
                 List<Object> list = new ArrayList<>();
 
-                list.add(p.getName());
+                list.add(p.toString());
                 list.add(c);
 
                 placesTabledata.add(list);
@@ -203,6 +210,7 @@ public class PlacesFXMLController implements Initializable {
                             }
 
                         } else {
+
                             list.add(vertexes[i].data + ", " + vertexes[j].data);
                             list.add(adMatrix[i][j] + "");
 
@@ -222,13 +230,13 @@ public class PlacesFXMLController implements Initializable {
         list.add("Distancia total: ");
         list.add(total + "KM");
         selectedPlacesTabledata.add(list);
-
         tablePlacesGraph.setItems(selectedPlacesTabledata);
+
     }
 
     @FXML
     private void btnExit(ActionEvent event) {
-        
+
         bp.setVisible(false);
     }
 
@@ -262,6 +270,7 @@ public class PlacesFXMLController implements Initializable {
                 if (c.isSelected()) {
 
                     try {
+
                         matrixGraph.addVertex(list.get(0));
                         counter++;
                     } catch (GraphException | ListException ex) {
@@ -318,8 +327,8 @@ public class PlacesFXMLController implements Initializable {
                         }
                     }
                     btnRandomDistance(event);
-                    initTableSelectedPlaces();
-                    FileManagementPlaces.addMatrixGraph(matrixGraph);
+                    btnRandomDistance(event);
+                    btnRandomDistance(event);
 
                 } catch (GraphException | ListException e) {
 
@@ -366,6 +375,7 @@ public class PlacesFXMLController implements Initializable {
                         for (int j = 0; j < vertexes.length; j++) {
 
                             if (vertexes[j] != null) {
+
                                 String data = vertexes[j].data + "";
 
                                 if (data.equalsIgnoreCase(graphicVertexes.get(i).getText())) {
@@ -375,6 +385,7 @@ public class PlacesFXMLController implements Initializable {
                                         if (!adMatrix[j][k].equals(0)) {
 
                                             Vertex v = vertexes[k];
+
                                             String data2 = v.data + "";
 
                                             for (int l = 0; l < graphicVertexes.size(); l++) {
@@ -434,6 +445,7 @@ public class PlacesFXMLController implements Initializable {
                         for (int j = 0; j < vertexes.length; j++) {
 
                             if (vertexes[j] != null) {
+
                                 String data = vertexes[j].data + "";
 
                                 if (data.equalsIgnoreCase(graphicVertexes.get(i).getText())) {
@@ -524,7 +536,6 @@ public class PlacesFXMLController implements Initializable {
                         Vertex v2 = vertexes[j];
 
                         for (int k = 0; k < graphicVertexes.size(); k++) {
-
                             String data2 = v.data + "";
 
                             if (data2.equalsIgnoreCase(graphicVertexes.get(k).getText())) {
@@ -589,26 +600,152 @@ public class PlacesFXMLController implements Initializable {
             panePlacesGraph.getChildren().clear();
             initTableSelectedPlaces();
             drawAdjacencyMatrixGraph(matrixGraph, panePlacesGraph);
-            
+            addEveryEdgesAndWeight();
+            FileManagementRestSuper.addListGraph(graphRestSup);
         } catch (GraphException | ListException e) {
 
         }
 
     }
 
+    private void addEveryEdgesAndWeight() {
+
+        matrixGraph = FileManagementPlaces.getPlacesGraph();
+        graphRestSup = FileManagementRestSuper.getRestSupGraph();
+
+        try {
+            if (graphRestSup.size() > 1) {
+
+                Vertex[] vertexes = graphRestSup.getVertexList();
+                Object[][] adMatrix = matrixGraph.getAdjacencyMatrix();
+
+                for (int i = 0; i < vertexes.length; i++) {
+
+                    if (vertexes[i] != null && i + 1 < vertexes.length && vertexes[i + 1] != null) {
+
+                        graphRestSup.addEdge(vertexes[i].data, vertexes[i + 1].data);
+
+                        if (vertexes[i].data instanceof Restaurant && vertexes[i + 1].data instanceof Restaurant) {
+
+                            Restaurant r = (Restaurant) vertexes[i].data;
+                            Restaurant r2 = (Restaurant) vertexes[i + 1].data;
+
+                            //Si están en el mismo lugar
+                            if (r.getLocation().equalsIgnoreCase(r2.getLocation())) {
+
+                                graphRestSup.addWeight(vertexes[i].data, vertexes[i + 1].data, r.getLocation());
+
+                            } else {
+
+                                //Usamos dijkstra, y así obtenemos las distancias entre cada vértice
+                                int index = indexOfPlaces(r.getLocation());
+                                int index2 = indexOfPlaces(r2.getLocation());
+
+                                int[] distances = Dijkstra.dijkstra(matrixGraph, index);
+                                graphRestSup.addWeight(vertexes[i].data, vertexes[i + 1].data, distances[index2] + " KM");
+                            }
+                        } else if (vertexes[i].data instanceof Restaurant && vertexes[i + 1].data instanceof Supermarket) {
+
+                            Restaurant r = (Restaurant) vertexes[i].data;
+                            Supermarket r2 = (Supermarket) vertexes[i + 1].data;
+
+                            //Si están en el mismo lugar
+                            if (r.getLocation().equalsIgnoreCase(r2.getLocation())) {
+
+                                graphRestSup.addWeight(vertexes[i].data, vertexes[i + 1].data, r.getLocation());
+
+                            } else {
+
+                                //Usamos dijkstra, y así obtenemos las distancias entre cada vértice
+                                int index = indexOfPlaces(r.getLocation());
+                                int index2 = indexOfPlaces(r2.getLocation());
+
+                                int[] distances = Dijkstra.dijkstra(matrixGraph, index);
+                                graphRestSup.addWeight(vertexes[i].data, vertexes[i + 1].data, distances[index2] + " KM");
+                            }
+                        } else if (vertexes[i].data instanceof Supermarket && vertexes[i + 1].data instanceof Restaurant) {
+
+                            Restaurant r2 = (Restaurant) vertexes[i + 1].data;
+                            Supermarket r = (Supermarket) vertexes[i].data;
+
+                            //Si están en el mismo lugar
+                            if (r.getLocation().equalsIgnoreCase(r2.getLocation())) {
+
+                                graphRestSup.addWeight(vertexes[i].data, vertexes[i + 1].data, r.getLocation());
+
+                            } else {
+
+                                //Usamos dijkstra, y así obtenemos las distancias entre cada vértice
+                                int index = indexOfPlaces(r.getLocation());
+                                int index2 = indexOfPlaces(r2.getLocation());
+
+                                int[] distances = Dijkstra.dijkstra(matrixGraph, index);
+                                graphRestSup.addWeight(vertexes[i].data, vertexes[i + 1].data, distances[index2] + " KM");
+                            }
+                        } else if (vertexes[i].data instanceof Supermarket && vertexes[i + 1].data instanceof Supermarket) {
+
+                            Supermarket r = (Supermarket) vertexes[i].data;
+                            Supermarket r2 = (Supermarket) vertexes[i + 1].data;
+
+                            //Si están en el mismo lugar
+                            if (r.getLocation().equalsIgnoreCase(r2.getLocation())) {
+
+                                graphRestSup.addWeight(vertexes[i].data, vertexes[i + 1].data, r.getLocation());
+
+                            } else {
+
+                                //Usamos dijkstra, y así obtenemos las distancias entre cada vértice
+                                int index = indexOfPlaces(r.getLocation());
+                                int index2 = indexOfPlaces(r2.getLocation());
+
+                                int[] distances = Dijkstra.dijkstra(matrixGraph, index);
+                                graphRestSup.addWeight(vertexes[i].data, vertexes[i + 1].data, distances[index2] + " KM");
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (ListException | GraphException ex) {
+        }
+    }
+
+    private int indexOfPlaces(String location) {
+
+        Vertex[] vertexes = matrixGraph.getVertexList();
+
+        for (int i = 0; i < vertexes.length; i++) {
+
+            Place p = (Place) vertexes[i].data;
+
+            if (p.toString().equals(location)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     @FXML
     private void btnNewGraph(ActionEvent event) {
 
-        Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
-        alert2.setTitle("Lugares");
-        alert2.setHeaderText("\nLa información actual se perderá y deberá volver a generar otro grafo.\n\n"
-                + "Precione aceptar para continuar.");
-        Optional<ButtonType> action = alert2.showAndWait();
+        if (graphRestSup == null || graphRestSup.isEmpty()) {
+            Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
+            alert2.setTitle("Lugares");
+            alert2.setHeaderText("\nLa información actual se perderá y deberá volver a generar otro grafo.\n\n"
+                    + "Precione aceptar para continuar.");
+            Optional<ButtonType> action = alert2.showAndWait();
 
-        if (action.get() == ButtonType.OK) {
-            panePlaces.setVisible(false);
-            matrixGraph = null;
-            FileManagementPlaces.deleteFilesGraph();
+            if (action.get() == ButtonType.OK) {
+                panePlaces.setVisible(false);
+                matrixGraph = null;
+                FileManagementPlaces.deleteFilesGraph();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Lugares");
+            alert.setHeaderText("No puede crear un nuevo grafo debido a que este \n"
+                    + "cuenta con establecimientos asociados.");
+            alert.showAndWait();
         }
+
     }
 }

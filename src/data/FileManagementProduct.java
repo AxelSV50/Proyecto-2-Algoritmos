@@ -20,16 +20,17 @@ import java.util.ArrayList;
  */
 public class FileManagementProduct {
 
-    private static String nameFileProduct = "Product.txt";
+    private static final String nameFileProduct = "Product.txt";
 
     public static String getNameFileProduct() {
         return nameFileProduct;
     }
-    
-    public static boolean add(int autoId, String name, double price, int supermarketId,String filename) {
+//    5. Food (auto-id(int), name(String), price(Double), restaurantID(int)
+
+    public static boolean add(int id, String name, double price, int supermarketID, String fileName) {
         try {
 
-            File f1 = new File(nameFileProduct);
+            File f1 = new File(fileName);
 
             if (!f1.exists()) {
                 f1.createNewFile();
@@ -37,8 +38,7 @@ public class FileManagementProduct {
             //Abre un flujo de escritua a el fichero
             FileWriter fw = new FileWriter(f1, true);
             BufferedWriter bw = new BufferedWriter(fw);
-            //Escribe los parámetros
-            bw.write(autoId + "," + name + "," + price + "," + supermarketId + "\n");
+            bw.write(id + "~" + name + "~" + price + "~" + supermarketID + "\n");
             bw.close();
 
         } catch (Exception e) {
@@ -64,18 +64,17 @@ public class FileManagementProduct {
             if (!bstProduct.isEmpty()) {
                 bstList = bstProduct.preOrder2();
                 for (int i = 0; i < bstList.size(); i++) {
-                        Product f = (Product) bstList.get(i);
-                        bw.write(f.getAutoId() + "~" + f.getName() + "~" + f.getPrice() + "~" + f.getSupermarketID() + "\n");
+                    Product p = (Product) bstList.get(i);
+                    bw.write(p.getId() + "~" + p.getName() + "~" + p.getPrice() + "~" + p.getSupermarketID() + "\n");
                 }
                 bw.close();
             }
         } catch (Exception e) {
-
             e.printStackTrace();
         }
         return true;
-    } // overwrite
-    
+    }
+
     public static BST getBstProduct() {
         BST bst = new BST();
         try {
@@ -97,5 +96,7 @@ public class FileManagementProduct {
             System.out.println(ex.getMessage());
         }
         return bst;
+
     }
-} // fin de clase
+
+}

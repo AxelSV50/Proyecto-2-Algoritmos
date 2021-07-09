@@ -6,9 +6,14 @@
 package main.food;
 
 import data.FileManagementFoods;
+import data.FileManagementRestSuper;
 import domain.Food;
+import domain.Restaurant;
+import domain.Supermarket;
 import domain.bst.BST;
 import domain.bst.TreeException;
+import domain.graph.AdjacencyListGraph;
+import domain.graph.Vertex;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -110,7 +115,7 @@ public class FoodFXMLController implements Initializable {
     private Button btnSearchFoodUpdate;
     @FXML
     private Pane foodTablePane;
-
+    AdjacencyListGraph graphRestSup;
     private BST bstFood = util.Utility.getBstFood();
     private Food f = new Food();
 
@@ -120,12 +125,8 @@ public class FoodFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         bstFood = util.Utility.getBstFood();
-
-        ObservableList tableContent2 = FXCollections.observableArrayList();
-        tableContent2.add("1234");
-        tableContent2.add("4321");
-        tableContent2.add("67");
-
+        graphRestSup = FileManagementRestSuper.getRestSupGraph();
+    
         colIdFood.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<List<String>, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<List<String>, String> data) {
@@ -150,13 +151,42 @@ public class FoodFXMLController implements Initializable {
                 return new ReadOnlyStringWrapper(data.getValue().get(3)); //To change body of generated methods, choose Tools | Templates.
             }
         });
-        comboBoxFoodAdd.setItems(tableContent2);
-        comboBoxFoodModify.setItems(tableContent2);
+    
         foodTable.setVisible(true);
         foodTablePane.setVisible(true);
-
+        initComboBox(comboBoxFoodAdd);
+        initComboBox(comboBoxFoodModify);
         txtTitle.setText("Lista de comidas");
         initTable();
+
+    }
+
+    private void initComboBox(ComboBox<String> comboBox) {
+
+        ObservableList tableContent = FXCollections.observableArrayList();
+
+        if (!graphRestSup.isEmpty() && (comboBox == comboBoxFoodAdd || comboBox == comboBoxFoodModify)) {
+
+            Vertex[] vertexes = graphRestSup.getVertexList();
+
+            for (int i = 0; i < vertexes.length; i++) {
+
+                if (vertexes[i] != null) {
+
+                    if (vertexes[i].data instanceof Restaurant) {
+
+                        Restaurant r = (Restaurant) vertexes[i].data;
+                        tableContent.add(r.getId()+ "-" + r.getName());
+
+                    }
+
+                }
+
+            }
+        }
+        comboBox.setPromptText("Seleccione");
+        comboBox.setItems(tableContent);
+        comboBox.setVisibleRowCount(3);
 
     }
 
@@ -247,7 +277,9 @@ public class FoodFXMLController implements Initializable {
 
             try {
 
-                if (bstFood.isEmpty() || !bstFood.contains2(new Food(0, tfAddNameFood.textProperty().getValue(), 0, Integer.parseInt(comboBoxFoodAdd.getValue())))) {
+                String array2[]= comboBoxFoodAdd.getValue().split("-");
+                
+                if (bstFood.isEmpty() || !bstFood.contains2(new Food(0, tfAddNameFood.textProperty().getValue(), 0, Integer.parseInt(array2[0])))) {
                     String idRestaurant = comboBoxFoodAdd.getValue();
                     //Si el usuario no selecciona nada, el combo devuelve null
 
@@ -496,7 +528,7 @@ public class FoodFXMLController implements Initializable {
         btnUpdate.setDisable(true);
         btnCancelModify.setDisable(true);
         tfSearchFoodUpdate.setDisable(false);
-        
+
     }
 
     @FXML

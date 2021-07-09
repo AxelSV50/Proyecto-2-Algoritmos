@@ -196,7 +196,7 @@
             <Pane fx:id="foodTablePane" layoutX="64.0" layoutY="124.0" prefHeight="24.0" prefWidth="673.0" style="-fx-background-color: #340049;" visible="false">
                <children>
                   <Separator layoutX="457.0" orientation="VERTICAL" prefHeight="24.0" prefWidth="6.0" />
-                  <Text fill="WHITE" layoutX="24.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id" textAlignment="CENTER" wrappingWidth="54.43310546875">
+                  <Text fill="WHITE" layoutX="24.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" textAlignment="CENTER" wrappingWidth="54.43310546875">
                      <font>
                         <Font name="Cambria" size="13.0" />
                      </font>
@@ -204,7 +204,7 @@
                         <Bloom />
                      </effect>
                   </Text>
-                  <Text fill="WHITE" layoutX="507.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Restaurante" textAlignment="CENTER" wrappingWidth="117.43310546875">
+                  <Text fill="WHITE" layoutX="507.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID Restaurante" textAlignment="CENTER" wrappingWidth="117.43310546875">
                      <font>
                         <Font name="Cambria" size="13.0" />
                      </font>

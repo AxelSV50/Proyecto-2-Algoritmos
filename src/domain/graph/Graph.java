@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domain;
+package domain.graph;
 
+import domain.*;
 import domain.list.ListException;
 import domain.queue.QueueException;
 import domain.stack.StackException;

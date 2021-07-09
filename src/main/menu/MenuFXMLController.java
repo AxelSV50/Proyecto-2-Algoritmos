@@ -5,6 +5,14 @@
  */
 package main.menu;
 
+import data.FileManagementPlaces;
+import data.FileManagementRestSuper;
+import domain.Restaurant;
+import domain.Supermarket;
+import domain.bst.BST;
+import domain.graph.AdjacencyListGraph;
+import domain.graph.AdjacencyMatrixGraph;
+import domain.graph.Vertex;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,6 +23,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -65,6 +74,9 @@ public class MenuFXMLController implements Initializable {
     @FXML
     private ImageView img7;
 
+    private AdjacencyMatrixGraph placesGraph;
+    private AdjacencyListGraph graphRestSup;
+
     /**
      * Initializes the controller class.
      */
@@ -79,19 +91,72 @@ public class MenuFXMLController implements Initializable {
 
     @FXML
     private void managementRestSuper(MouseEvent event) {
+
+        placesGraph = FileManagementPlaces.getPlacesGraph();
+        if (placesGraph != null && !placesGraph.isEmpty()) {
+
+            loadPage("/main/restaurantsAndSupermarkets/RestSuperFXML");
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Mantenimiento Restaurantes & Supermercados");
+            alert.setHeaderText("Primero debe generar el grafo de lugares.");
+            alert.showAndWait();
+        }
+
     }
 
     @FXML
     private void managementProducts(MouseEvent event) {
 
-        loadPage("/main/product/ProductFXML");
+        graphRestSup = FileManagementRestSuper.getRestSupGraph();
+        Vertex[] vertexes = graphRestSup.getVertexList();
 
+        boolean canIn = false;
+        if (graphRestSup != null && !graphRestSup.isEmpty()) {
+            for (int i = 0; i < vertexes.length; i++) {
+                if (vertexes[i]!=null&&vertexes[i].data instanceof Supermarket) {
+                    canIn = true;
+                    i = vertexes.length;
+                }
+            }
+        }
+
+        if (canIn) {
+
+            loadPage("/main/product/ProductFXML");
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Mantenimiento de Productos");
+            alert.setHeaderText("Debe agregar al menos un supermercado.");
+            alert.showAndWait();
+        }
     }
 
     @FXML
     private void managementFood(MouseEvent event) {
 
-        loadPage("/main/food/FoodFXML");
+        graphRestSup = FileManagementRestSuper.getRestSupGraph();
+        Vertex[] vertexes = graphRestSup.getVertexList();
+
+        boolean canIn = false;
+        if (graphRestSup != null && !graphRestSup.isEmpty()) {
+            for (int i = 0; i < vertexes.length; i++) {
+                if (vertexes[i]!=null&& vertexes[i].data instanceof Restaurant) {
+                    canIn = true;
+                    i = vertexes.length;
+                }
+            }
+        }
+
+        if (canIn) {
+
+            loadPage("/main/food/FoodFXML");
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Mantenimiento de Comidas");
+            alert.setHeaderText("Debe agregar al menos un restaurante.");
+            alert.showAndWait();
+        }
 
     }
 

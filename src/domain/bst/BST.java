@@ -159,7 +159,8 @@ public class BST implements Tree {
                     height(node.right) + 1);
         }
     }
-   public int height2() throws TreeException {
+
+    public int height2() throws TreeException {
         if (isEmpty()) {
             throw new TreeException("Binary Tree is empty");
         }
@@ -177,6 +178,7 @@ public class BST implements Tree {
 
         }
     }
+
     @Override
     public Object min() throws TreeException {
         if (isEmpty()) {
@@ -290,7 +292,7 @@ public class BST implements Tree {
             throw new TreeException("Binary Search Tree is empty");
         }
         if (contains(a) && !contains(b)) {
-            System.out.println("Element "+ a +" due changed to element "+ b );
+            System.out.println("Element " + a + " due changed to element " + b);
             remove(a);
             add(b);
         }
@@ -304,30 +306,30 @@ public class BST implements Tree {
         result += "\nPostOrder: " + postOrder(root);
         return result;
     }
- 
-       
-    public  ArrayList<Object> preOrder2() throws TreeException {
+
+    public ArrayList<Object> preOrder2() throws TreeException {
         ArrayList<Object> bstList = new ArrayList<Object>();
         if (isEmpty()) {
-           
+
         }
-       preOrder2(root,bstList);
-        return  bstList;
+        preOrder2(root, bstList);
+        return bstList;
     }
 
     //Tranversal tour: N-L-R
-    private Object preOrder2(BTreeNode node,ArrayList<Object> bstList) {
+    private Object preOrder2(BTreeNode node, ArrayList<Object> bstList) {
         String result = "";
         if (node != null) {
             bstList.add(node.data);
-          
+
             result = node.data + " ";
-            result += preOrder2(node.left,bstList);
-            result += preOrder2(node.right,bstList);
+            result += preOrder2(node.left, bstList);
+            result += preOrder2(node.right, bstList);
         }
         return result;
     }
-      public boolean contains2(Object element) throws TreeException {
+
+    public boolean contains2(Object element) throws TreeException {
         if (isEmpty()) {
             throw new TreeException("Binary Search Tree is empty");
         }
@@ -346,5 +348,23 @@ public class BST implements Tree {
         }
     }
 
-  
+    private boolean binarySearch3(BTreeNode node, Object element) {
+        if (node == null) {
+            return false;
+        } else if (util.Utility.equals3(node.data, element)) {
+            return true; //ya lo encontro
+        } else if (util.Utility.lessT3(element, node.data)) {
+            return binarySearch3(node.left, element);
+        } else {
+            return binarySearch3(node.right, element);
+        }
+    }
+
+    public boolean contains3(Object element) throws TreeException {
+        if (isEmpty()) {
+            throw new TreeException("Binary Search Tree is empty");
+        }
+        return binarySearch3(root, element);
+    }
+
 }

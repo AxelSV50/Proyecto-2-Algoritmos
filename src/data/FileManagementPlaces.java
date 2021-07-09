@@ -5,12 +5,10 @@
  */
 package data;
 
-import static data.FileManagementUsers.getDataLogin;
-import domain.AdjacencyMatrixGraph;
-import domain.GraphException;
+import domain.graph.AdjacencyMatrixGraph;
+import domain.graph.GraphException;
 import domain.Place;
-import domain.Vertex;
-import domain.list.CircularLinkedList;
+import domain.graph.Vertex;
 import domain.list.ListException;
 import domain.list.SinglyLinkedList;
 import java.io.BufferedReader;
@@ -19,10 +17,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-//
 
+//
 /**
  *
  * @author Usuario
@@ -110,7 +106,10 @@ public class FileManagementPlaces {
                 BufferedReader br2 = new BufferedReader(new FileReader(f1));
 
                 while ((line = br2.readLine()) != null) {
-                    graph.addVertex(line);
+
+                    String array [] = line.split("~");
+                    Place p = new Place(array[0], Integer.parseInt(array[1]));
+                    graph.addVertex(p);
                 }
                 br2.close();
 
@@ -121,7 +120,7 @@ public class FileManagementPlaces {
 
                 for (int i = 0; i < vertexes.length; i++) {
                     for (int j = 0; j < vertexes.length; j++) {
-                            String element = br3.readLine();
+                        String element = br3.readLine();
                         try {
                             adMatrix[i][j] = Integer.parseInt(element);
 
@@ -163,6 +162,7 @@ public class FileManagementPlaces {
 
             for (int i = 0; i < vertexes.length; i++) {
                 if (vertexes[i] != null) {
+
                     bw.write(vertexes[i].data + "\n");
                 }
             }
@@ -187,19 +187,19 @@ public class FileManagementPlaces {
             e.printStackTrace();
         }
     }
-    public static void deleteFilesGraph(){
-        
-            File f1 = new File(nameFileMatrixGraphVetexes);
-            File f2 = new File(nameFileMatrixGraphEdgesAndWeights);
 
-            if (f1.exists()) {
-                f1.delete();
-            }
-            if (f2.exists()) {
-                f2.delete();
-            }
+    public static void deleteFilesGraph() {
 
-        
+        File f1 = new File(nameFileMatrixGraphVetexes);
+        File f2 = new File(nameFileMatrixGraphEdgesAndWeights);
+
+        if (f1.exists()) {
+            f1.delete();
+        }
+        if (f2.exists()) {
+            f2.delete();
+        }
+
     }
 
 }

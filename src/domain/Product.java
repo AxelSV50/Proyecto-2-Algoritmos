@@ -10,22 +10,42 @@ package domain;
  * @author Usuario
  */
 public class Product {
+
+    private int id;
     private static int autoId;
     private String name;
     private double price;
     private int supermarketID;
 
-    public Product(int autoId,String name, double price, int supermarketID) {
+    public Product(String name, double price, int supermarketID) {
         this.name = name;
         this.price = price;
-        this.autoId = ++autoId;
+        this.id = ++autoId;
         this.supermarketID = supermarketID;
     } // Constrcutor
+
+    public Product() {
+    }
+
+    public Product(int id, String name, double price, int supermarketID) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.supermarketID = supermarketID;
+    }
 
     public static int getAutoId() {
         return autoId;
     }
-
+    
+    public int getId() {
+        return id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public static void setAutoId(int autoId) {
         Product.autoId = autoId;
     }
@@ -52,6 +72,11 @@ public class Product {
 
     public void setSupermarketID(int supermarketID) {
         this.supermarketID = supermarketID;
+    }
+
+    @Override
+    public String toString() {
+        return id+"~"+name + "~" + price + "~" + supermarketID;
     }
 
 } // Fin de clase
